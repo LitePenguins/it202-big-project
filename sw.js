@@ -1,15 +1,17 @@
 var cacheName = 'hello-pwa';
 var filesToCache = [
   '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/main.js'
+  'index.html',
+  'css/style.css',
+  'js/index.js'
 ];
 
 /* Start the service worker and cache all of the app's content */
 self.addEventListener('install', function(e) {
+    console.log("install - before wait");
   e.waitUntil(
     caches.open(cacheName).then(function(cache) {
+         console.log("install - in open");
       return cache.addAll(filesToCache);
     })
   );
