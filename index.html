@@ -8,7 +8,6 @@
   <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
   <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
 
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -43,55 +42,18 @@
       padding: 0;
     }
 
-    .tabBarTitle {
-      /* width: 200rem; */
-      width: 200px;
-    }
-
-    .tabItem .mdc-tab__text-label {
-      color: white;
-    }
-
-    .tabItem .mdc-tab__icon {
-      color: white;
-    }
-
-    .tabBar {
-      --mdc-theme-primary: #d43024;
-      background-color: #2e2d2b;
-      /* width: 50vw;
-      margin-right: 0;
-      margin-left: auto; */
-    }
-
-    #savedTab {
-      text-align: center;
-    }
-
-    #settingsTab {
-      text-align: center;
-      padding: 50px;
-    }
-
-    .mdc-card {
-      padding: 16px;
-      height: 500px;
-      width: 500px;
-      margin: 50px;
-      display: inline-block;
-    }
-
     .demo-card__media {
       background-image: url("images/charging.png");
     }
   </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
   <header class="mdc-top-app-bar tb">
     <div class="mdc-top-app-bar__row">
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <span class="mdc-top-app-bar__title tabBarTitle">Placeholder</span>
+        <span class="mdc-top-app-bar__title tabBarTitle">EV Charger Map</span>
         <div class="mdc-tab-bar tabBar" role="tablist" data-mdc-auto-init="MDCTabBar">
           <div class="mdc-tab-scroller">
             <div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll" style="margin-bottom: 0px;">

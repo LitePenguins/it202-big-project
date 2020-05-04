@@ -47,7 +47,7 @@ window.mdc.autoInit();
 
 let center = {};
 var map;
-var db = new Dexie("friend_database");
+var db = new Dexie("savedTempDatabase");
 db.version(1).stores({
   saved: 'temp'
 });
@@ -56,10 +56,10 @@ db.version(1).stores({
 function initMap() {
   // JS API is loaded and available
   // The location of Home
-  let home = {
-    lat: 42.092363,
-    lng: -87.978326
-  };
+  // let home = {
+  //   lat: 42.092363,
+  //   lng: -87.978326
+  // };
 
   let somewhereElse = {
     lat: 42.281627,
@@ -72,10 +72,10 @@ function initMap() {
       center: somewhereElse
     });
   // The marker, positioned at Home
-  let marker = new google.maps.Marker({
-    position: home,
-    map: map
-  });
+  // let marker = new google.maps.Marker({
+  //   position: home,
+  //   map: map
+  // });
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -114,7 +114,7 @@ function populateMap() {
   let lat = center.lat;
   let long = center.lng;
   //console.log("lat: " + lat + "long: " + long);
-  const endPoint = "https://api.openchargemap.io/v3/poi/?key=90b0a208-e066-4755-83fa-c6f75fd9c7ad&output=json&maxresults=25&compact=true&verbose=false&latitude=" +
+  const endPoint = "https://api.openchargemap.io/v3/poi/?key=90b0a208-e066-4755-83fa-c6f75fd9c7ad&output=json&maxresults=500&compact=true&verbose=false&latitude=" +
     lat + "&longitude=" +
     long + "&distance=50";
 
@@ -224,9 +224,9 @@ function populateSavedList() {
         console.log("DB temp: " + saved.temp);
 
         if (document.querySelector('#basic-switch').checked) {
-          temp.querySelector('.demo-card__title').textContent = element.title + " - " + saved.temp + "C";
+          temp.querySelector('.demo-card__title').textContent = element.title + " - Current temperature: " + saved.temp + "C";
         } else {
-          temp.querySelector('.demo-card__title').textContent = element.title + " - " + saved.temp + "F";
+          temp.querySelector('.demo-card__title').textContent = element.title + " - Current temperature: " + saved.temp + "F";
         }
       }).catch((err) => {
 

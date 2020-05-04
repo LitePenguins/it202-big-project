@@ -1,0 +1,37 @@
+.tabBarTitle {
+  /* width: 200rem; */
+  width: 200px;
+}
+
+.tabItem .mdc-tab__text-label {
+  color: white;
+}
+
+.tabItem .mdc-tab__icon {
+  color: white;
+}
+
+.tabBar {
+  --mdc-theme-primary: #d43024;
+  background-color: #2e2d2b;
+  /* width: 50vw;
+  margin-right: 0;
+  margin-left: auto; */
+}
+
+#savedTab {
+  text-align: center;
+}
+
+#settingsTab {
+  text-align: center;
+  padding: 50px;
+}
+
+.mdc-card {
+  padding: 16px;
+  height: 500px;
+  width: 500px;
+  margin: 50px;
+  display: inline-block;
+}
