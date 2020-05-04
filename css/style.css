@@ -1,5 +1,4 @@
 .tabBarTitle {
-  /* width: 200rem; */
   width: 200px;
 }
 
@@ -14,9 +13,6 @@
 .tabBar {
   --mdc-theme-primary: #d43024;
   background-color: #2e2d2b;
-  /* width: 50vw;
-  margin-right: 0;
-  margin-left: auto; */
 }
 
 #savedTab {

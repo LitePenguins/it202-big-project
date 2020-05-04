@@ -44,7 +44,6 @@ const switchControl = document.querySelector('.mdc-switch').MDCSwitch;
 
 window.mdc.autoInit();
 
-
 let center = {};
 var map;
 var db = new Dexie("savedTempDatabase");
@@ -235,7 +234,6 @@ function populateSavedList() {
 
       let temp = document.querySelector('#apple').cloneNode(true);
       //console.log(currentTemp);
-
 
       temp.querySelector('.cardAddress1').textContent = element.address1;
       temp.querySelector('.cardAddress2').textContent = element.address2;
