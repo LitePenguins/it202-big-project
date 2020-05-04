@@ -42,16 +42,6 @@
       padding: 0;
     }
 
-    /* .tabBar {
-      width: 50vw;
-      margin-right: 0;
-      margin-left: auto;
-    } */
-
-    /* .tab {
-      width: 30%;
-    } */
-
     .tabBarTitle {
       /* width: 200rem; */
       width: 200px;
@@ -73,21 +63,21 @@
       margin-left: auto; */
     }
 
-    /* #test {
-      display: flex;
-    } */
+    #savedTab {
+      text-align: center;
+    }
 
-    /* #search {
-      width: 20%;
-    } */
+    #settingsTab {
+      text-align: center;
+      padding: 50px;
+    }
 
-    .demo-card {
-      width: 500px;
+    .mdc-card {
+      padding: 16px;
       height: 500px;
-      margin-left: 50px;
-      margin-top: 50px;
-      margin-right: 50px;
-      /* margin: 48px 0 0 48px; */
+      width: 500px;
+      margin: 50px;
+      display: inline-block;
     }
   </style>
 </head>
@@ -142,46 +132,48 @@
       <div id="test" style="height:100%; width:100%;">
         <div id="map" style="width:100%;"></div>
         <div id="search">
-          <!-- <div class="mdc-card demo-card potato">
-            <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
-              <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url(&quot;https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg&quot;);"></div>
-              <div class="demo-card__primary">
-                <h2 class="demo-card__title mdc-typography mdc-typography--headline6">Our Changing Planet</h2>
-                <h3 class="demo-card__subtitle mdc-typography mdc-typography--subtitle2">by Kurt Wagner</h3>
-              </div>
-              <div class="demo-card__secondary mdc-typography mdc-typography--body2">Visit ten places on our planet that are undergoing the biggest changes today.</div>
-            </div>
-            <div class="mdc-card__actions">
-              <div class="mdc-card__action-buttons">
-                <button class="mdc-button mdc-card__action mdc-card__action--button"> <span class="mdc-button__ripple"></span> Read</button>
-                <button class="mdc-button mdc-card__action mdc-card__action--button"> <span class="mdc-button__ripple"></span> Bookmark</button>
-              </div>
-              <div class="mdc-card__action-icons">
-                <button class="mdc-icon-button mdc-card__action mdc-card__action--icon--unbounded" aria-pressed="false" aria-label="Add to favorites" title="Add to favorites">
-                  <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">favorite</i>
-                  <i class="material-icons mdc-icon-button__icon">favorite_border</i>
-                </button>
-                <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Share" data-mdc-ripple-is-unbounded="true">share</button>
-                <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="More options" data-mdc-ripple-is-unbounded="true">more_vert</button>
-              </div>
-            </div>
-          </div> -->
         </div>
+      </div>
+
+      <!-- Don't ask why this is here instead of the other section... -->
+      <div id="myCardTemplate" style="display: none;">
+        <div class="mdc-card demo-card demo-basic-with-header" id="apple">
+          <div class="demo-card__primary">
+            <h2 class="demo-card__title mdc-typography mdc-typography--headline6">Title</h2>
+            <h3 class="demo-card__subtitle mdc-typography mdc-typography--subtitle2 cardAddress1">Address</h3>
+            <h3 class="demo-card__subtitle mdc-typography mdc-typography--subtitle2 cardAddress2">Address2</h3>
+          </div>
+          <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
+            <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url(https://i.imgur.com/i6Xzij2.png);"></div>
+          </div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <!-- <button class="mdc-button mdc-card__action mdc-card__action--button"> <span class="mdc-button__ripple"></span> Show on Map</button> -->
+            </div>
+          </div>
+        </div>
+        </template>
       </div>
     </div>
 
-    <div class="sec" id="settingsTab">
-      <h1>settings</h1>
+    <div class="sec" id="settingsTab" style="height:100%; width:100%; background-color: #f7f7f7;">
+      <div class="mdc-switch" data-mdc-auto-init="MDCSwitch">
+        <div class="mdc-switch__track"></div>
+        <div class="mdc-switch__thumb-underlay">
+          <div class="mdc-switch__thumb"></div>
+          <input type="checkbox" id="basic-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+        </div>
+      </div>
+      <label for="basic-switch">F/C on saved screen</label>
+
+      <button class="mdc-button mdc-button--raised" id="refreshSavedButton">  <span class="mdc-button__ripple"></span> Refresh Saved Locations</button>
     </div>
 
-    <div class="sec" id="savedTab">
-      <h1>saved</h1>
+    <div class="sec" id="savedTab" style="height:100%; width:100%; background-color: #f7f7f7;">
     </div>
 
-  </div>
-
-  <script src="js/index.js" charset="utf-8"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXsNql_K27Wnitakz9k9Wq9sd81yRxXAw&callback=initMap"></script>
+    <script src="js/index.js" charset="utf-8"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXsNql_K27Wnitakz9k9Wq9sd81yRxXAw&callback=initMap"></script>
 </body>
 
 </html>

@@ -40,6 +40,8 @@ document.querySelectorAll('.mdc-tab').forEach(item => {
 });
 
 const tabBar = document.querySelector('.mdc-tab-bar').MDCTabBar;
+const switchControl = document.querySelector('.mdc-switch').MDCSwitch;
+
 window.mdc.autoInit();
 
 
@@ -73,7 +75,7 @@ function initMap() {
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
-       center = {
+      center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
@@ -92,8 +94,13 @@ function initMap() {
 }
 
 let elements = [];
+
+let clickedTitle = '';
+let clickedAddress1 = '';
+let clickedAddress2 = '';
 let clickedLat = '';
 let clickedLong = '';
+
 let savedLocations = [];
 
 function populateMap() {
@@ -104,18 +111,18 @@ function populateMap() {
   let long = center.lng;
   //console.log("lat: " + lat + "long: " + long);
   const endPoint = "https://api.openchargemap.io/v3/poi/?key=90b0a208-e066-4755-83fa-c6f75fd9c7ad&output=json&maxresults=25&compact=true&verbose=false&latitude=" +
-  lat + "&longitude=" +
-  long + "&distance=50";
+    lat + "&longitude=" +
+    long + "&distance=50";
 
   fetch(endPoint).then((res) => {
     return res.json();
   }).then((json) => {
-    console.log(json);
+    //console.log(json);
 
     let infowindow = new google.maps.InfoWindow();
 
     json.forEach(element => {
-      console.log(element);
+      //console.log(element);
 
       //console.log(title);
       let title = element.AddressInfo.Title;
@@ -152,21 +159,35 @@ function populateMap() {
       });
       //}
     });
+
+    google.maps.event.addListener(infowindow, 'domready', function() {
+      // whatever you want to do once the DOM is ready
+      console.log("clicked infowindow: " + document.querySelector('#chargerTitle').textContent);
+      clickedTitle = document.querySelector('#chargerTitle').textContent;
+      clickedAddress1 = document.querySelector('#address').textContent;
+      clickedAddress2 = document.querySelector('#address2').textContent;
+    });
   });
   //console.log(elements);
 }
 
+//pressing save button
 document.addEventListener('click', (event) => {
   //console.log("klick");
   let element = event.target;
   //console.log(element);
-  if(element.classList.contains("saveButton")){
+  if (element.classList.contains("saveButton")) {
+    console.log("Pressed save button");
     console.log(clickedLat);
     console.log(clickedLong);
+    console.log(clickedTitle);
 
     let clickedLocation = {
+      title: clickedTitle,
       lat: clickedLat,
-      lng: clickedLong
+      lng: clickedLong,
+      address1: clickedAddress1,
+      address2: clickedAddress2
     };
 
     savedLocations.push(clickedLocation);
@@ -176,14 +197,41 @@ document.addEventListener('click', (event) => {
 
 function populateSavedList() {
   document.querySelector('#savedTab').innerHTML = '';
-  
-  savedLocations.forEach(element => {
-    let p1 = document.createElement("p");
-      p1.textContent = element.lat;
-      document.querySelector('#savedTab').append(p1);
 
-      let p2 = document.createElement("p");
-      p2.textContent = element.lng;
-      document.querySelector('#savedTab').append(p2);
+  savedLocations.forEach(element => {
+    let currentTemp = '';
+    let endPoint = "https://api.openweathermap.org/data/2.5/weather?lat=" + element.lat + "&lon=" + element.lng + "&appid=722a3a55a0b7bf384f78d70a7762bc9b&units=imperial";
+
+    if (document.querySelector('#basic-switch').checked) {
+      endPoint = "https://api.openweathermap.org/data/2.5/weather?lat=" + element.lat + "&lon=" + element.lng + "&appid=722a3a55a0b7bf384f78d70a7762bc9b&units=metric";
+    }
+    console.log(endPoint);
+
+    fetch(endPoint).then((res) => {
+      return res.json();
+    }).then((json) => {
+      currentTemp = json.main.temp;
+      console.log(currentTemp);
+
+      let temp = document.querySelector('#apple').cloneNode(true);
+      console.log(currentTemp);
+
+      if (document.querySelector('#basic-switch').checked) {
+        temp.querySelector('.demo-card__title').textContent = element.title + " - " + currentTemp + "C";
+      } else {
+        temp.querySelector('.demo-card__title').textContent = element.title + " - " + currentTemp + "F";
+      }
+      temp.querySelector('.cardAddress1').textContent = element.address1;
+      temp.querySelector('.cardAddress2').textContent = element.address2;
+      document.querySelector('#savedTab').appendChild(temp);
+    });
   });
 }
+
+//pressing refresh location button
+document.querySelector('#refreshSavedButton').addEventListener('click', () => {
+  populateSavedList();
+  // document.getElementById('mapTab').style.display = "none";
+  // document.getElementById('settingsTab').style.display = "none";
+  // document.getElementById('savedTab').style.display = "block";
+});
