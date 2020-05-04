@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Hello World</title>
+  <title>EV Charger Map</title>
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
   <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
   <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -79,6 +80,10 @@
       margin: 50px;
       display: inline-block;
     }
+
+    .demo-card__media {
+      background-image: url("images/charging.png");
+    }
   </style>
 </head>
 
@@ -144,7 +149,7 @@
             <h3 class="demo-card__subtitle mdc-typography mdc-typography--subtitle2 cardAddress2">Address2</h3>
           </div>
           <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
-            <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url(https://i.imgur.com/i6Xzij2.png);"></div>
+            <div class="mdc-card__media mdc-card__media--16-9 demo-card__media"></div>
           </div>
           <div class="mdc-card__actions">
             <div class="mdc-card__action-buttons">

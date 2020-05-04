@@ -1,9 +1,9 @@
 var cacheName = 'hello-pwa';
 var filesToCache = [
   '/',
-  'index.html',
-  'css/style.css',
-  'js/index.js'
+  '/index.html',
+  '/css/style.css',
+  '/js/index.js'
 ];
 
 /* Start the service worker and cache all of the app's content */
@@ -18,10 +18,13 @@ self.addEventListener('install', function(e) {
 });
 
 /* Serve cached content when offline */
-self.addEventListener('fetch', function(e) {
-  e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
-    })
-  );
+//map will not work while offline
+self.addEventListener('fetch', function(event) {
+ console.log(event.request.url);
+
+ event.respondWith(
+   caches.match(event.request).then(function(response) {
+     return response || fetch(event.request);
+   })
+ );
 });

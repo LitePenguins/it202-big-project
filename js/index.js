@@ -47,6 +47,10 @@ window.mdc.autoInit();
 
 let center = {};
 var map;
+var db = new Dexie("friend_database");
+db.version(1).stores({
+  saved: 'temp'
+});
 
 // Attach your callback function to the `window` object
 function initMap() {
@@ -211,16 +215,28 @@ function populateSavedList() {
       return res.json();
     }).then((json) => {
       currentTemp = json.main.temp;
-      console.log(currentTemp);
+
+      db.saved.put({
+        temp: currentTemp
+      }).then(() => {
+        return db.saved.get(currentTemp);
+      }).then((saved) => {
+        console.log("DB temp: " + saved.temp);
+
+        if (document.querySelector('#basic-switch').checked) {
+          temp.querySelector('.demo-card__title').textContent = element.title + " - " + saved.temp + "C";
+        } else {
+          temp.querySelector('.demo-card__title').textContent = element.title + " - " + saved.temp + "F";
+        }
+      }).catch((err) => {
+
+      });
+      console.log("Local temp: " + currentTemp);
 
       let temp = document.querySelector('#apple').cloneNode(true);
-      console.log(currentTemp);
+      //console.log(currentTemp);
 
-      if (document.querySelector('#basic-switch').checked) {
-        temp.querySelector('.demo-card__title').textContent = element.title + " - " + currentTemp + "C";
-      } else {
-        temp.querySelector('.demo-card__title').textContent = element.title + " - " + currentTemp + "F";
-      }
+
       temp.querySelector('.cardAddress1').textContent = element.address1;
       temp.querySelector('.cardAddress2').textContent = element.address2;
       document.querySelector('#savedTab').appendChild(temp);
@@ -231,7 +247,4 @@ function populateSavedList() {
 //pressing refresh location button
 document.querySelector('#refreshSavedButton').addEventListener('click', () => {
   populateSavedList();
-  // document.getElementById('mapTab').style.display = "none";
-  // document.getElementById('settingsTab').style.display = "none";
-  // document.getElementById('savedTab').style.display = "block";
 });
